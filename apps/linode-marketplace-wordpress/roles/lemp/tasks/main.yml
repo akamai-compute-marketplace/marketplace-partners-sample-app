@@ -1,0 +1,109 @@
+---
+# set_hostname
+- name: setting up hostname
+  import_role:
+    name: hostname
+
+# write _domain to vars.
+- name: write _domain to vars
+  lineinfile: 
+    insertafter: EOF
+    path: group_vars/linode/vars
+    line: | 
+      _domain: {{ _domain }}
+
+# set customer supplied sudo user, password and SSH keys
+- name: set sudo user
+  import_role:
+    name: sudouser
+  when: username is defined
+
+# dns creation
+- name: create dns A record
+  import_role:
+    name: create_dns_record
+  when: 
+    - token_password is defined
+    - default_dns is not defined
+
+# sets customer supplied ssh pubkey to limited user
+- name: set ssh pubkey
+  import_role:
+      name: sshkey
+  when: 
+    - pubkey is defined
+    - username is defined
+
+# apt_setup_update
+- name: update system packages
+  import_role:
+    name: update_pkgs
+
+# ufw_install
+- name: enabling ufw
+  import_role:
+    name: ufw
+
+# ufw rules 
+- name: apply ufw rules
+  import_tasks: ufw_rules.yml
+
+# fail2ban
+- name: enabling fail2ban
+  import_role:
+    name: fail2ban_install
+
+ # nginx
+- name: installing nginx
+  apt:
+    pkg:
+    - nginx
+    - nginx-common
+    state: present
+
+- name: enabling nginx on boot
+  service:
+    name: nginx
+    enabled: yes
+
+# php
+- name: install PHP
+  apt:
+    pkg:
+    - php-common
+    - php-fpm
+    - php-mysql
+    state: present
+
+- name: getting php version
+  shell:
+    cmd: "php -r \"echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;\""
+  register: php_version
+
+- name: starting php-fpm
+  service:
+    name: "php{{ php_version.stdout }}-fpm"
+    state: started
+    enabled: yes
+
+- name: disable nginx default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: nginx configs
+  import_tasks: nginx_configs.yml
+
+# mysql
+- name: installing mariadb
+  apt:
+    pkg:
+    - mariadb-server
+    - python3-mysqldb
+    state: present
+  register: mariadb
+
+- name: running mysql secure installation
+  import_role:
+    name: securemysql
+
