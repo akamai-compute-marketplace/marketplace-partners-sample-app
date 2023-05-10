@@ -1,6 +1,7 @@
 # Marketplace App Development Guidelines.
 
-The following design best practices should be adhered to: 
+A Marketplace App leverages the Linode API and Ansible to deploy and configure a single node service.
+
   - Marketplace applications should use fully supported Linode Ubuntu 22.02 images when possible. 
   - Required Linode plans for Marketplace applications should be no more than 16GB shared CPU or 8GB dedicated  CPU. This is the default instance size limit for new user accounts. Deployments designed for larger instance sizes can be accepted on a case-by-case basis where required. 
   - The deployment of the service should be “hands-off,” requiring no command-line intervention from the user before reaching its initial state. The end user should provide all necessary details via User Defined Variables (UDF) defined in the StackScript, so that Ansible can fully automate the deployment.
@@ -13,7 +14,7 @@ The following design best practices should be adhered to:
 
 ## Deployment Scripts
 
-All Bash files, including the deployment Stackscript for each Marketplace app is kept in the `scripts` directory. Deployment Stackscripts should adhere to the following conventions.
+All Bash files, including the deployment Stackscript for each Marketplace App is kept in the `deployment_scripts` directory. Deployment Stackscripts should adhere to the following conventions.
 
 - The StackScript must implement the [Linux trap command](https://man7.org/linux/man-pages/man1/trap.1p.html) for error handling.
 - The primary purposes of the Stackscript is to assign global variables, create a working directory and Python venv before cloning the correct Marketplace App repo.
@@ -24,14 +25,14 @@ All Bash files, including the deployment Stackscript for each Marketplace app is
 ## Ansible Playbooks 
 
 - All Ansible playbooks should generally adhere to the [sample directory layout](https://docs.ansible.com/ansible/latest/user_guide/sample_setup.html#sample-ansible-setup) and best practices/recommendations from the latest Ansible [User Guide](https://docs.ansible.com/ansible/latest/user_guide/index.html).
-  - All Ansible playbooks for Marketplace applications should include common .ansible-lint, .yamllint, ansible.cfg and .gitignore files. ($ include links to files in example repo) 
+  - All Ansible playbooks for Marketplace applications should include common [`.ansible-lint`](../apps/linode-marketplace-wordpress/.ansible-lint), [`.yamllint`](../apps/linode-marketplace-wordpress/.yamllint), [`ansible.cfg`](../apps/linode-marketplace-wordpress/ansible.cfg) and [`.gitignore`](../.gitignore) files.
   - All Ansible playbooks should use Ansible Vault for initial secrets management. Generated credentials should be provided to the end-user in a standard .deployment-secrets.txt file located in the sudo-user’s home directory. 
   - Whenever possible Jinja should be leveraged to populate a consistent variable naming convention during node provisioning. ($ include links to files in example repo.) 
   - It is recommended to import service specific tasks as modular .yml files under the application’s main.yml 
 
-All Marketplace Application playbooks must include the following directory trees:
-```To use a custom FQDN see [Configure your Linode for Reverse DNS](https://www.linode.com/docs/guides/configure-your-linode-for-reverse-dns/).
-APP-oca/
+Marketplace App playbooks should align with the following sample directory trees. There may be certain applications that require deviation from this structure, but they should follow as close as possible.
+```
+linode-marketplace-$APP/
   ansible.cfg
   collections.yml
   provision.yml
@@ -46,10 +47,6 @@ APP-oca/
       vars 
       secret_vars
   
-  scripts/
-    ss.sh
-    run.sh
-
   roles/
     $APP/
       handlers/
@@ -68,7 +65,7 @@ APP-oca/
         main.yml
       tasks/ 
         main.yml
-    
+   
 ```
 As general guidelines: 
   - The secret_vars file should be encrypted with Ansible Vault

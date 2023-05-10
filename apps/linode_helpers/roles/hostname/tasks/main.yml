@@ -10,12 +10,14 @@
   when:
     - domain is defined
     - subdomain != "www"
-
+    
 - name: set dns fact for domain
   set_fact:
     _domain: '{{ domain }}'
     cacheable: yes
-  when: domain is defined
+  when: 
+    - domain is defined
+    - subdomain == "www"
 
 - name: set dns fact for default dns
   set_fact:
