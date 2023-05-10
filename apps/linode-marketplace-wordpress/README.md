@@ -22,7 +22,7 @@ WordPress is a popular dynamic content management system focused on blogs. WordP
 
 | Name  | Action  |
 | :---  | :---    |
-| Hostname | Assigns a hostname to the Linode based on domains provided via UDF or uses default rDNS. The Hostname module accepts a UDF to assign a FQDN and write to the `/etc/hosts` file. If no domain is provided the default `ip.linodeusercontent.com` rDNS will be used. For consistency, DNS and SSL configurations should use the Hostname generated `_domain` var when possible. |
+|| Hostname   | Assigns a hostname to the Linode based on domains provided via UDF or uses default rDNS. | The Hostname module accepts a UDF to assign a FQDN and write to the `/etc/hosts` file. If no domain is provided the default `ip.linodeusercontent.com` rDNS will be used. For consistency, DNS and SSL configurations should use the Hostname generated `_domain` var when possible. |
 | Update Packages   | The Update Packages module performs apt update and upgrade actions as root.  |
 | UFW   | Add UFW firewalls to the Linode  | The UFW module will import a `ufw_rules.yml` provided in `roles/$APP/tasks` and enables the service.  |
 | Fail2Ban   | The Fail2Ban module installs, activates and enables the Fail2Ban service.  |
@@ -30,7 +30,7 @@ WordPress is a popular dynamic content management system focused on blogs. WordP
 
 ## Use our API
 
-Customers can choose to the deploy the LAMP stack through the Linode Marketplace or directly using API. Before using the commands below, you will need to create an [API token](https://www.linode.com/docs/products/tools/linode-api/get-started/#create-an-api-token) or configure [linode-cli](https://www.linode.com/products/cli/) on an environment, and substitute for default values.
+Customers can choose to the deploy the LAMP stack through the Linode Marketplace or directly using API. Before using the commands below, you will need to create an [API token](https://www.linode.com/docs/products/tools/linode-api/get-started/#create-an-api-token) or configure [linode-cli](https://www.linode.com/products/cli/) on an environment, and substitute for default values..
 
 SHELL:
 ```
