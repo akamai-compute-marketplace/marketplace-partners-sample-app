@@ -89,7 +89,6 @@ linode-cli linodes create \
 
 - [Create Linode via API](https://www.linode.com/docs/api/linode-instances/#linode-create)
 - [Stackscript referece](https://www.linode.com/docs/guides/writing-scripts-for-use-with-linode-stackscripts-a-tutorial/#user-defined-fields-udfs)
-- []()
 
 ##### Author
 ##### - Elvis Segura (@n0vabyte)

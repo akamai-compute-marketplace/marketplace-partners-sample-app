@@ -22,6 +22,9 @@ In addition to submitting your [Ansible playbook](https://docs.ansible.com/ansib
 
 **App Name**
 
+**App README** \
+*Please write a README.md following the format of this [example](../apps/linode-marketplace-wordpress/README.md).*
+
 **App Description**  
 *A short description (100-125 words) to go with your app listing in Marketplace on Linode.com. Note that this description is subject to edits before publication.*
 
@@ -57,4 +60,4 @@ Linode’s Marketplace listings features gradient backgrounds and a prominent lo
 
 ## Become a Marketplace Partner
 
-If you're interested in becoming a Marketplace App Partner you can [Submit your App](https://www.linode.com/marketplace/app-partners/) to start a conversation with our Marketplace team.
+If you're interested in becoming a Marketplace App Partner you can [register your App](https://www.linode.com/marketplace/app-partners/) to start a conversation with our Marketplace team.
