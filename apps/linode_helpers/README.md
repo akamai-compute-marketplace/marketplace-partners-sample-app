@@ -18,4 +18,4 @@ The Linode Helper functions are static roles that can be imported into Marketpla
 
 ## Creating Your Own
 
-Additional Linode Helpers can be added while respecting [Ansible common practice](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html) and directory structure. Linode Helpers should perform common, repeatable system configuration tasks with minimal dependancies. Linode Helper functions can be imported as roles as needed in playbooks. Please see [DEVELOPMENT.md](DEVELOPMENT.md) for more detailed standards.
+Additional Linode Helpers can be added while respecting [Ansible common practice](https://docs.ansible.com/ansible/2.8/user_guide/playbooks_best_practices.html) and directory structure. Linode Helpers should perform common, repeatable system configuration tasks with minimal dependancies. Linode Helper functions can be imported as roles as needed in playbooks. Please see [Development guide](../../docs/DEVELOPMENT.md) for more detailed standards.
