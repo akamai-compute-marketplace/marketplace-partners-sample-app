@@ -9,6 +9,8 @@
   vars_files:
     - group_vars/linode/vars
   roles:
+    - common
     # provioner will update with desired stack
     - PROVISIONER-WEBSERVER-STACK
     - wordpress
+    - post

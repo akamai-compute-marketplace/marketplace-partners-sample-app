@@ -25,4 +25,4 @@ For more information on roles please refer to the [Ansible documentation](https:
 
 ## Creating Your Own
 
-For more information on creating and submitting a Partner App for the Linode Marketplace please see [Contributing](CONTRIBUTING.md) and [Development](DEVELOPMENT.md).
+For more information on creating and submitting a Partner App for the Linode Marketplace please see [Contributing](docs/CONTRIBUTING.md) and [Development](docs/DEVELOPMENT.md).
