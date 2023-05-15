@@ -110,9 +110,7 @@ function run {
 
 function installation_complete {
   # dumping credentials
-  local creds=$(egrep "(*^wp_|*mysql)" ${WORK_DIR}/${MARKETPLACE_APP}/group_vars/linode/vars | awk {'print $2'})
-  echo "$creds" > /root/.linode_credentials.txt
-
+  egrep "(*^wp_|*mysql)" ${WORK_DIR}/${MARKETPLACE_APP}/group_vars/linode/vars | awk {'print $1 $2'} > /root/.linode_credentials.txt
   cat << EOF
 #########################
 # INSTALLATION COMPLETE #
