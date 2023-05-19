@@ -141,40 +141,8 @@ Below are examples of UDFs your deployment can use in the [deployment StackScrip
 - UDFs containing the string `password` within the `name` will display as obfuscated dots in the Cloud Manager. They are also encrypted on the host and do not log.
 - A UDF containing `label="$label" header="Yes" default="Yes" required="Yes"` will display as a header in the Cloud Manager, but does not affect deployment.
 
-## Testing
-
-After setting up a development environment, you can test your changes locally using [Molecule](https://molecule.readthedocs.io/en/latest/index.html), or against Linodes on your account. Please ensure that your tests pass on supported Ubuntu releases.
-
-1. [Setup](#setup)
-2. [Testing with Molecule](#testing-with-molecule)
-3. [Testing on Linode](#testing-on-linode)
-
-## Setup
-
-Create a virtual environment to isolate dependencies from other packages on your system.
-```
-python3 -m virtualenv env
-source env/bin/activate
-```
-
-Install Ansible collections and required Python packages.
-```
-pip install -r requirements.txt
-```
-
-## Testing with Molecule
-
-Molecule is a framework for developing and testing Ansible roles. After installing Vagrant and Virtualbox, you can use Molecule to provision and test against Vagrant boxes in your local environment. This is the recommended approach, because it helps to enforce consistency and well-written roles.
-```
-cd linode-marketplace-$APP
-molecule init scenario --role-name $LINODE-APP --driver-name vagrant
-```
-Molecule's default `linode-marketplace-$APP/roles/$APP/molecule/default/molecule.yml` will need to be [configured](https://molecule.readthedocs.io/en/latest/configuration.html) to test the supported distributions locally via Vagrant.
-
-The role can then be tested by calling `molecule test`.
-
 ## Testing on Linode
 
-If you cannot use the Molecule approach due to limitations in your local environment, you can instead provision and test against Linodes on your account. Note that billing will occur for any Linode instances deployed.
+To test your Marketplace App you can provision and deploy the app to Linodes on your account. Note that billing will occur for any Linode instances deployed.
 
-To test your Marketplace App on Linode infrastucutre, copy and paste `wordpress-deploy.sh` into a new Stackscript on your account. Then substitute the provided Stackscript ID into our example [API calls](apps/linode-marketplace-wordpress/README.md#use-our-api). Logging output can be viewed in `/var/log/stackscript.log`.
+To test your Marketplace App on Linode infrastucutre, copy and paste `$app-deploy.sh` into a new Stackscript on your account. Then update the Git Repo section of `$app-deploy.sh` to include your fork of the Marketplace repo. Finally, substitute the provided Stackscript ID into our example [API calls](apps/linode-marketplace-wordpress/README.md#use-our-api). Logging output can be viewed in `/var/log/stackscript.log` in the deployed instance.
