@@ -66,6 +66,18 @@
         --dbuser="{{ wp_db_user }}" \
         --dbpass="{{ wp_db_pass }}" \
 
+- name: configuring admin info
+  shell:
+    chdir: "/var/www/{{ _domain }}/public_html"
+    cmd: |
+      wp core install --allow-root \
+          --url="{{ _domain }}" \
+          --title="{{ site_title }}" \
+          --admin_user="{{ wp_admin_user }}" \
+          --admin_email="{{ soa_email_address }}" \
+          --admin_password="{{ wp_admin_pass }}" \
+          --path="/var/www/{{ _domain }}/public_html"
+
 - name: updating document root ownership
   file:
     path: "/var/www/{{ _domain }}/public_html"
