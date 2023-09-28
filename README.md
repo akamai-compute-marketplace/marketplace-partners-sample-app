@@ -1,4 +1,4 @@
-# Linode Marketplace Apps
+# AKAMAI Marketplace Apps
 
 The Linode Marketplace is designed to make it easier for developers and companies to share [One-Click Apps](https://www.linode.com/marketplace/) with the Linode community. One-Click Apps are portable and modular solutioning tools written as Ansible playbooks. The Linode Marketplace allows users to quickly deploy services and perform essential configurations on a Linode compute instance's first boot. 
 
